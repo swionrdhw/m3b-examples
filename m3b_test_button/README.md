@@ -60,15 +60,8 @@ The GPS Tracker does not give any feedback about the success of a transmission. 
 ## Blueprint
 
 The manual uplink has the MPF = 0 and sends an increasing message number and the data from the acceleration sensor to determine the device orientation.
-The downlink sends the RSSI, SNR, eqSNR and timestamp of the preceding uplink.
-See [Blueprint](../m3b_demo_blueprint.txt).
+The end-point expects a response to this uplink with the RSSI, SNR, eqSNR and timestamp, see the downlink part in [Blueprint](../m3b_demo_blueprint.txt) for the size and formatting.
 
 The periodic uplink has the MPF = 194 and also sends an increasing message number. It is a separate message number from the one used in the manually triggered uplinks.
 
 The GPS tracker payload uses the MPF = 193 and sends the information if a valid fix is available and the number of sattelites used. If a fix is available it also sends the latest position, accuracy and speed.
-
-## Backend
-
-The funcionality to send back the downlink on the manual uplink and to store the sent uplinks for later evaluation must be implemented in the backend. This [Node Red flow](../node_red_flow.json) creates the downlink containing the needed data to display the signal quality.
-
-TODO: Refer to CenterBox?
