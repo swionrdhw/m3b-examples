@@ -484,7 +484,7 @@ static void send_uplink_gps_f(void) {
     -> create AT command ourself as we do not need the returned values in GPS mode.
     This has the disadvantage that we will not detect errors.
   */
-  char cmd[40];
+  char cmd[42];
   uint8_t cmd_len = snprintf(cmd, sizeof(cmd), "AT-UMPF=%ux", length);
   for (int i = 0; i < length; i++) {
     cmd_len += snprintf(&cmd[cmd_len], 3, "%02X", msg[i]);

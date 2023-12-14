@@ -10,8 +10,10 @@ This example can be used with a standalone M3B Demo Board or with the Swissphone
 
 1. Install Arduino IDE (tested with v2.1.1)
 2. Install [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html)
-3. Add [stm32duino](https://github.com/stm32duino) to Board Managers (v2.6.0)
-4. Add  to library manager:
+3. Set STM32duino path to board managers:
+    - ArduinoIDE > File > Preferences > Setting > Additional board manager URLs > https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+4. Add [stm32duino](https://github.com/stm32duino) to Board Managers (v2.6.0)
+5. Add  to library manager:
      - [RingBuffer](https://github.com/Locoduino/RingBuffer) (v1.0.4)
      - [Adafruit_SH110X](https://github.com/adafruit/Adafruit_SH110X) (v2.1.8) (only if display is used)
      - [sht31](https://github.com/RobTillaart/SHT31) (v0.3.8)

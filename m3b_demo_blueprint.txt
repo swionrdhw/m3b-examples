@@ -116,7 +116,7 @@
         }
     ],
     "meta": {
-        "name": "m3b demo applications",
+        "name": "M3B demo applications",
         "vendor": "Swissphone"
     },
     "typeEui": "5c335cf96d336200",
@@ -218,5 +218,5 @@
             ]
         }
     ],
-    "version": "0.1"
+    "version": "1.0"
 }
