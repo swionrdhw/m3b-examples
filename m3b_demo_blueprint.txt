@@ -1,0 +1,222 @@
+{
+    "component": {
+        "rssi": {
+            "func": "$/10",
+            "littleEndian": false,
+            "size": 16,
+            "type": "int",
+            "unit": "dBm"
+        },
+        "snr": {
+            "func": "$/10",
+            "littleEndian": false,
+            "size": 16,
+            "type": "int",
+            "unit": "db"
+        },
+        "timestamp": {
+            "func": "",
+            "littleEndian": false,
+            "size": 32,
+            "type": "uint",
+            "unit": ""
+        },
+        "acceleration": {
+            "littleEndian": false,
+            "size": 16,
+            "type": "int",
+            "unit": "mG"
+        },
+        "humidity": {
+            "littleEndian": false,
+            "size": 8,
+            "type": "uint",
+            "unit": "%"
+        },
+        "pressure": {
+            "func": "$/10",
+            "littleEndian": false,
+            "size": 16,
+            "type": "uint",
+            "unit": "hPa"
+        },
+        "temperature": {
+            "func": "$ / 10.0 - 273.1",
+            "littleEndian": false,
+            "size": 16,
+            "type": "uint",
+            "unit": "°C"
+        },
+        "degree": {
+            "func": "$ / 10000000.0",
+            "littleEndian": false,
+            "size": 32,
+            "type": "int",
+            "unit": "°"
+        },
+        "accuracy": {
+            "littleEndian": false,
+            "size": 8,
+            "type": "uint",
+            "unit": "m"
+        },
+        "speed": {
+            "littleEndian": false,
+            "size": 8,
+            "type": "uint",
+            "unit": "km/h"
+        },
+        "voltage": {
+            "func": "$ / 1000.0",
+            "littleEndian": false,
+            "size": 16,
+            "type": "uint",
+            "unit": "V"
+        },
+        "uint16": {
+            "littleEndian": false,
+            "size": 16,
+            "type": "uint",
+            "unit": ""
+        },
+        "uint7": {
+            "littleEndian": false,
+            "size": 7,
+            "type": "uint",
+            "unit": ""
+        },
+        "bit": {
+            "littleEndian": false,
+            "size": 1,
+            "type": "uint",
+            "unit": ""
+        }
+    },
+    "downlink": [
+        {
+            "id": 0,
+            "payload": [
+                {
+                    "component": "rssi",
+                    "name": "RSSI"
+                },
+                {
+                    "component": "snr",
+                    "name": "SNR"
+                },
+                {
+                    "component": "snr",
+                    "name": "eqSNR"
+                },
+                {
+                    "component": "timestamp",
+                    "name": "timestamp"
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "name": "m3b demo applications",
+        "vendor": "Swissphone"
+    },
+    "typeEui": "5c335cf96d336200",
+    "uplink": [
+        {
+            "id": 0,
+            "payload": [
+                {
+                    "component": "uint16",
+                    "name": "Manual msg nr"
+                },
+                {
+                    "component": "acceleration",
+                    "name": "Acc X"
+                },
+                {
+                    "component": "acceleration",
+                    "name": "Acc Y"
+                },
+                {
+                    "component": "acceleration",
+                    "name": "Acc Z"
+                }
+            ]
+        },
+        {
+            "id": 192,
+            "payload": [
+                {
+                    "component": "temperature",
+                    "name": "Temp"
+                },
+                {
+                    "component": "humidity",
+                    "name": "Hum"
+                },
+                {
+                    "component": "pressure",
+                    "name": "Press"
+                },
+                {
+                    "component": "acceleration",
+                    "name": "Acc X"
+                },
+                {
+                    "component": "acceleration",
+                    "name": "Acc Y"
+                },
+                {
+                    "component": "acceleration",
+                    "name": "Acc Z"
+                }
+            ]
+        },
+        {
+            "id": 193,
+            "payload": [
+                {
+                    "component": "bit",
+                    "name": "Fix"
+                },
+                {
+                    "component": "uint7",
+                    "name": "Satellites"
+                },
+                {
+                    "component": "uint16",
+                    "name": "msg nr"
+                },
+                {
+                    "component": "degree",
+                    "name": "lon",
+                    "condition": "$Fix == 1"
+                },
+                {
+                    "component": "degree",
+                    "name": "lat",
+                    "condition": "$Fix == 1"
+                },
+                {
+                    "component": "accuracy",
+                    "name": "accuracy",
+                    "condition": "$Fix == 1"
+                },
+                {
+                    "component": "speed",
+                    "name": "speed",
+                    "condition": "$Fix == 1"
+                }
+            ]
+        },
+        {
+            "id": 194,
+            "payload": [
+                {
+                    "component": "uint16",
+                    "name": "Periodic msg nr"
+                }
+            ]
+        }
+    ],
+    "version": "0.1"
+}
