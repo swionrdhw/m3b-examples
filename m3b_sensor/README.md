@@ -4,7 +4,7 @@
 
 This is an arduino based code example for the M3B Demo Board to periodically read the on board sensors and send the data over mioty.
 
-This example can be used with a standalone M3B Demo Board or with the Swissphone M3B Extension with display. This allows to also display the measured sensor data on the device and use a button to change the sending period.
+This example can be used with a standalone M3B Demo Board or with the Swissphone m.RADIO. This allows to also display the measured sensor data on the device and use a button to change the sending period.
 
 ## Getting Started
 

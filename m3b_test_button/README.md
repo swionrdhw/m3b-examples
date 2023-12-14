@@ -4,11 +4,11 @@
 
 This is an arduino based code example for the M3B Demo Board to test the mioty signal coverage by sending uplinks to a base station that responds with a downlink containing the signal quality of the uplink.
 
-This example is intended for the Swissphone M3B Extension with display and GPS module.
+This example is intended for the Swissphone m.RADIO, an M3B extension with display and GPS module.
 
 It contains three different application modes:
 - Coverage test mode manual: sends mioty uplinks on button press and displays signal quality.
-- Coverage test mode periodic : periodically sends mioty uplinks and manually by button press. Displays signal quality on manually triggered uplinks.
+- Coverage test mode periodic : periodically sends mioty uplinks and manually on button press. Displays signal quality on manually triggered uplinks.
 - GPS tracker: periodically sends position.
 
 ## Getting Started
@@ -20,6 +20,7 @@ It contains three different application modes:
      - [Adafruit_SH110X](https://github.com/adafruit/Adafruit_SH110X) (v2.1.8)
      - [Adafruit_GPS](https://github.com/adafruit/Adafruit_GPS) (v1.7.2)
      - [TimeLib](https://playground.arduino.cc/Code/Time/) (v1.6.1)
+     - [adxl362](https://www.arduino.cc/reference/en/libraries/adxl362/) (v1.5.0)
      - [at_client](https://www.github.com/mioty-iot/mioty_at_client_c)
 
 ## Flashing STM32 from Arduino IDE
@@ -42,7 +43,7 @@ On startup one of the three application modes can be selected by pressing the co
 Depending on the mode, different settings can be changed by pressing the buttons:
 - Uplink message period
 - Transmission power
-- Uplink mioty mode {Standard, Low latency}
+- mioty uplink mode {Standard, Low latency}
 
 The manual uplink can be triggered with the side button.
 
@@ -56,14 +57,16 @@ The GPS Tracker does not give any feedback about the success of a transmission. 
 
 ## Blueprint
 
-The manual uplink has the MPF = 0 and sends an increasing message number.
+The manual uplink has the MPF = 0 and sends an increasing message number and the data from the acceleration sensor to determine the device orientation.
 The downlink sends the RSSI, SNR, eqSNR and timestamp of the preceding uplink.
 See [Blueprint](../m3b_demo_blueprint.txt).
 
 The periodic uplink has the MPF = 194 and also sends an increasing message number. It is a separate message number from the one used in the manually triggered uplinks.
 
-The GPS tracker payload uses the MPF = 193 and sends the information if a valid fix is available and the number of sattelites used. If a fix is available it also sends the position and accuracy.
+The GPS tracker payload uses the MPF = 193 and sends the information if a valid fix is available and the number of sattelites used. If a fix is available it also sends the latest position, accuracy and speed.
 
-## Node Red
+## Backend
 
-On the mioty base station, this [Node Red flow](../node_red_flow.json) creates the downlink containing the needed data to display the signal quality.
+The funcionality to send back the downlink on the manual uplink and to store the sent uplinks for later evaluation must be implemented in the backend. This [Node Red flow](../node_red_flow.json) creates the downlink containing the needed data to display the signal quality.
+
+TODO: Refer to CenterBox?

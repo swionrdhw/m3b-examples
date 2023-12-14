@@ -3,13 +3,11 @@
 This repository provides various code examples based on arduino for the M3B Demo Board with the Swissphone mioty module m.YON.
 
 - Tunnel mode & modul firmware upgrade
-- Tester Taster & CW mode
-- GNSS Tracker
+- Network Tester & GPS Tracker
 - mioty sensor
-- CW mode
 
-The Tester Taster and GNSS Tracker require the Swissphone M3B board extension with display and GNSS module. (The sensor example can also use the display to show the sensor values.)
-For the GNSS example, the GNSS switch on the extender must b enabled. For the other examples it is advised to disable it to avoid unnecessary energy use by the GNSS module.
+The Network Tester & GPS Tracker require the Swissphone m.RADIO hardware, which expands the M3B Board with a display and GPS module. (The sensor example can also use the display to show the sensor values.)
+For the GPS Tracker, the GPS switch on the extender must be enabled. For the other examples it is advised to disable it to avoid unnecessary energy use by the GPS module.
 
 For more information on the examples see the README in the respective exmaple folder.
 

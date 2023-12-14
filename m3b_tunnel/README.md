@@ -48,4 +48,4 @@ After a finished FW update, the board must be reset with the reset-button to exi
 
 ## Restrictions
 
-Because the TX_INH and TX_ACT pin of the m.YON are not connected on the M3B Demo Board, the TX active and TX inhibit functionality can not be used. The same applies for the shutdown command: **The Shutdown command should not be used as there is no possible way to wake up the module** (other than disconnecting the power source).
+Because the TX_INH, TX_ACT and RX_ACT pin of the m.YON are not connected on the M3B Demo Board, the TX inhibit, TX active and RX active functionality can not be used. The same applies for the shutdown command: **The Shutdown command should not be used as there is no possible way to wake up the module** (other than disconnecting the power source).
