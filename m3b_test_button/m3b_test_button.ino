@@ -393,7 +393,7 @@ static void send_uplink_manual_f(void) {
   adxl362.readXYZTData(acc_x, acc_y, acc_z, temp);
   transmission_active_b = true;
   manual_msg_counter++;
-  uint8_t ul[8];
+  uint8_t ul[10];
   ul[0] = (manual_msg_counter >> 8) & 0xFF;
   ul[1] = manual_msg_counter & 0xFF;
   ul[2] = acc_x >> 8;
@@ -402,6 +402,8 @@ static void send_uplink_manual_f(void) {
   ul[5] = acc_y;
   ul[6] = acc_z >> 8;
   ul[7] = acc_z;
+  ul[8] = 0;  // Battery voltage, not measured on HW index A
+  ul[9] = 0;
   uint8_t dl[100];
   dl[6] = 0;
   uint8_t dl_size = sizeof(dl);
@@ -443,9 +445,11 @@ static void send_uplink_periodic_f(void) {
   transmission_active_b = true;
   periodic_msg_counter++;
   uint32_t pcnt;
-  uint8_t msg[3] = { 194 };
+  uint8_t msg[5] = { 194 };
   msg[1] = (periodic_msg_counter >> 8) & 0xFF;
   msg[2] = periodic_msg_counter & 0xFF;
+  msg[3] = 0;  // Battery voltage, not measured on HW index A
+  msg[4] = 0;
   SerialM3B.println("Sending uplink...");
   miotyAtClient_sendMessageUniMPF(msg, sizeof(msg), &pcnt);
   digitalWrite(LED_BLUE, 1);
@@ -458,24 +462,26 @@ static void send_uplink_gps_f(void) {
   digitalWrite(LED_BLUE_EXTENDER, 0);
   transmission_active_b = true;
   periodic_msg_counter++;
-  uint8_t msg[14] = { 193, 0 };
-  uint8_t length = 4;
-  msg[1] = gps_pos.valid_b << 7;
-  msg[1] += gps_pos.sat_num;
-  msg[2] = (periodic_msg_counter >> 8) & 0xFF;
-  msg[3] = periodic_msg_counter & 0xFF;
+  uint8_t msg[16] = { 193, 0 };
+  uint8_t length = 6;
+  msg[1] = 0;  // Battery voltage, not measured on HW index A
+  msg[2] = 0;
+  msg[3] = gps_pos.valid_b << 7;
+  msg[3] += gps_pos.sat_num;
+  msg[4] = (periodic_msg_counter >> 8) & 0xFF;
+  msg[5] = periodic_msg_counter & 0xFF;
   if (gps_pos.valid_b) {
-    msg[4] = (gps_pos.longitude >> 24) & 0xFF;
-    msg[5] = (gps_pos.longitude >> 16) & 0xFF;
-    msg[6] = (gps_pos.longitude >> 8) & 0xFF;
-    msg[7] = (gps_pos.longitude >> 0) & 0xFF;
-    msg[8] = (gps_pos.latitude >> 24) & 0xFF;
-    msg[9] = (gps_pos.latitude >> 16) & 0xFF;
-    msg[10] = (gps_pos.latitude >> 8) & 0xFF;
-    msg[11] = (gps_pos.latitude >> 0) & 0xFF;
-    msg[12] = gps_pos.accuracy;
-    msg[13] = gps_pos.speed;
-    length = 14;
+    msg[6] = (gps_pos.longitude >> 24) & 0xFF;
+    msg[7] = (gps_pos.longitude >> 16) & 0xFF;
+    msg[8] = (gps_pos.longitude >> 8) & 0xFF;
+    msg[9] = (gps_pos.longitude >> 0) & 0xFF;
+    msg[10] = (gps_pos.latitude >> 24) & 0xFF;
+    msg[11] = (gps_pos.latitude >> 16) & 0xFF;
+    msg[12] = (gps_pos.latitude >> 8) & 0xFF;
+    msg[13] = (gps_pos.latitude >> 0) & 0xFF;
+    msg[14] = gps_pos.accuracy;
+    msg[15] = gps_pos.speed;
+    length = 16;
   }
   SerialM3B.println("Sending uplink...");
   /* 

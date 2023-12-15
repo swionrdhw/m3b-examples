@@ -199,7 +199,7 @@ static void update_display_f(void) {
 }
 
 static void send_uplink_f(void) {
-  uint8_t msg[12] = { 0xC0 };
+  uint8_t msg[14] = { 0xC0 };
   uint16_t temp_int = (temperature + 273.1f) * 10;
   uint16_t pres_int = pressure * 10;
   uint32_t pcnt = 0;
@@ -214,6 +214,8 @@ static void send_uplink_f(void) {
   msg[9] = acc_y;
   msg[10] = acc_z >> 8;
   msg[11] = acc_z;
+  msg[12] = 0;  // Battery voltage, not measured on HW index A
+  msg[13] = 0;
   miotyAtClient_sendMessageUniMPF(msg, sizeof(msg), &pcnt);
 }
 

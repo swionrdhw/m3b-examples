@@ -116,7 +116,7 @@
         }
     ],
     "meta": {
-        "name": "M3B demo applications",
+        "name": "m3b demo applications",
         "vendor": "Swissphone"
     },
     "typeEui": "5c335cf96d336200",
@@ -139,6 +139,10 @@
                 {
                     "component": "acceleration",
                     "name": "Acc Z"
+                },
+                {
+                    "component": "voltage",
+                    "name": "Battery"
                 }
             ]
         },
@@ -168,12 +172,20 @@
                 {
                     "component": "acceleration",
                     "name": "Acc Z"
+                },
+                {
+                    "component": "voltage",
+                    "name": "Battery"
                 }
             ]
         },
         {
             "id": 193,
             "payload": [
+                {
+                    "component": "voltage",
+                    "name": "Battery"
+                },
                 {
                     "component": "bit",
                     "name": "Fix"
@@ -214,6 +226,10 @@
                 {
                     "component": "uint16",
                     "name": "Periodic msg nr"
+                },
+                {
+                    "component": "voltage",
+                    "name": "Battery"
                 }
             ]
         }
